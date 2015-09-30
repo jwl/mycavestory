@@ -1,17 +1,18 @@
-
-INCLUDES = include
 CC = g++
-CFLAGS = -I$(INCLUDES) -Wall -Wextra -pedantic -std=c++11
 
+INCDIR = inc
 OBJDIR = obj
 SRCDIR = src
 BINDIR = bin
+
 FINAL_EXECUTABLE = mycavestory
 
 LIBS = -lSDL2
+CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
 
+# List header files here, assuming they're all in the inc/ directory
 _DEPS = graphics.h
-DEPS = $(patsubst %, $(INCLUDES)/%,$(_DEPS))
+DEPS = $(patsubst %, $(INCDIR)/%,$(_DEPS))
 
 _OBJ = main.o graphics.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
@@ -25,5 +26,5 @@ $(BINDIR)/$(FINAL_EXECUTABLE): $(OBJ)
 .PHONY: clean
 
 clean:
-		rm -f $(OBJDIR)/*.o *~ core $(INCLUDES)/*~ $(BINDIR)/*
+		rm -f $(OBJDIR)/*.o *~ core $(INCDIR)/*~ $(BINDIR)/*
 
