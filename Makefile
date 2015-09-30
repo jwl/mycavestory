@@ -11,10 +11,10 @@ LIBS = -lSDL2
 CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
 
 # List header files here, assuming they're all in the inc/ directory
-_DEPS = graphics.h
+_DEPS = graphics.h game.h input.h
 DEPS = $(patsubst %, $(INCDIR)/%,$(_DEPS))
 
-_OBJ = main.o graphics.o
+_OBJ = main.o graphics.o game.o input.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
