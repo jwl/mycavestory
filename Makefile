@@ -1,6 +1,6 @@
 CC = g++
 
-INCDIR = inc
+INCDIR = includes
 OBJDIR = obj
 SRCDIR = src
 BINDIR = bin
