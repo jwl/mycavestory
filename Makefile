@@ -7,14 +7,14 @@ BINDIR = bin
 
 FINAL_EXECUTABLE = mycavestory
 
-LIBS = -lSDL2
+LIBS = -lSDL2 -lSDL2_image
 CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
 
 # List header files here, assuming they're all in the inc/ directory
-_DEPS = graphics.h game.h input.h
+_DEPS = graphics.h game.h input.h sprite.h globals.h
 DEPS = $(patsubst %, $(INCDIR)/%,$(_DEPS))
 
-_OBJ = main.o graphics.o game.o input.o
+_OBJ = main.o graphics.o game.o input.o sprite.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
