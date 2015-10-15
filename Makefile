@@ -6,6 +6,7 @@ SRCDIR = src
 BINDIR = bin
 
 FINAL_EXECUTABLE = mycavestory
+DEBUG_EXECUTABLE = debug
 
 LIBS = -lSDL2 -lSDL2_image
 CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
@@ -15,7 +16,7 @@ CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
 _DEPS = *.h
 DEPS = $(patsubst %, $(INCDIR)/%,$(_DEPS))
 
-_OBJ = main.o graphics.o game.o input.o sprite.o animatedsprite.o player.o level.o
+_OBJ = main.o graphics.o game.o input.o sprite.o animatedsprite.o player.o level.o tile.o tinyxml2.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
@@ -29,3 +30,5 @@ $(BINDIR)/$(FINAL_EXECUTABLE): $(OBJ)
 clean:
 	rm -f $(OBJDIR)/*.o *~ core $(INCDIR)/*~ $(BINDIR)/*
 
+debug: $(OBJ)
+	$(CC) -g -o $(BINDIR)/$(DEBUG_EXECUTABLE) $^ $(CFLAGS) $(LIBS)
