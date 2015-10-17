@@ -1,9 +1,19 @@
 CC = clang++
 
+# Directories. All paths are relative to root directory of project
+# INCDIR = Directory where local headers are found
+# OBJDIR = Directory where object files should temporarily be stored
+# SRCDIR = Directory to source files
+# BINDIR = Directory where final executable should be placed
 INCDIR = includes
 OBJDIR = obj
 SRCDIR = src
 BINDIR = bin
+
+CXXFILES := $(shell find src -mindepth 1 -maxdepth 4 -name "*.cpp")
+OBJFILES := $(CXXFILES:$(SRCDIR)/%.cpp=%)
+OFILES := $(OBJFILES:%=$(OBJDIR)/%.o)
+HFILES := $(OBJFILES:%=$(INCDIR)/%.h)
 
 FINAL_EXECUTABLE = mycavestory
 DEBUG_EXECUTABLE = debug
@@ -11,18 +21,14 @@ DEBUG_EXECUTABLE = debug
 LIBS = -lSDL2 -lSDL2_image
 CFLAGS = -I$(INCDIR) -Wall -Wextra -pedantic -std=c++11
 
-# List header files here, assuming they're all in the inc/ directory
-#_DEPS = graphics.h game.h input.h sprite.h globals.h animatedsprite.h player.h level.h
-_DEPS = *.h
-DEPS = $(patsubst %, $(INCDIR)/%,$(_DEPS))
+ifdef DEBUG
+	CFLAGS := $(CFLAGS) -g
+endif
 
-_OBJ = main.o graphics.o game.o input.o sprite.o animatedsprite.o player.o level.o tile.o tinyxml2.o
-OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(BINDIR)/$(FINAL_EXECUTABLE): $(OBJ)
+$(BINDIR)/$(FINAL_EXECUTABLE): $(OFILES)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
@@ -30,5 +36,5 @@ $(BINDIR)/$(FINAL_EXECUTABLE): $(OBJ)
 clean:
 	rm -f $(OBJDIR)/*.o *~ core $(INCDIR)/*~ $(BINDIR)/*
 
-debug: $(OBJ)
+debug: $(OFILES)
 	$(CC) -g -o $(BINDIR)/$(DEBUG_EXECUTABLE) $^ $(CFLAGS) $(LIBS)
