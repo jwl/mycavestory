@@ -25,7 +25,7 @@ ifdef DEBUG
 	CFLAGS := $(CFLAGS) -g
 endif
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp 
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(BINDIR)/$(FINAL_EXECUTABLE): $(OFILES)
