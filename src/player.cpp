@@ -180,6 +180,19 @@ void Player::handleSlopeCollisions(std::vector<Slope> &others) {
 	}
 }
 
+void Player::handleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics) {
+	// Check if the player is grounded and holding the down arrow
+	// If so, go through the door.
+	// This assumes the player is already colliding with the door object.
+	for (int i = 0; i < others.size(); i++) {
+		if (this->_grounded == true && this->_lookingDown == true) {
+			level = Level(others.at(i).getDestination(), graphics);
+			this->_x = level.getPlayerSpawnPoint().x;
+			this->_y = level.getPlayerSpawnPoint().y;
+		}
+	}
+}
+
 void Player::update(float elapsedTime) {
 	//Apply gravity
 	if (this->_dy <= player_constants::GRAVITY_CAP) {

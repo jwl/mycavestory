@@ -31,14 +31,14 @@ public:
 			side == sides::RIGHT ? this->getRight() :
 			side == sides::TOP ? this->getTop() :
 			side == sides::BOTTOM ? this->getBottom() :
-			sides::NONE;	
+			sides::NONE;
 	}
-	
+
 	// bool collidesWith
 	// Takes in another Rectangle and checks if two are colliding
 	bool collidesWith(const Rectangle &other) const {
 		return
-			this->getRight() >= other.getLeft() && 
+			this->getRight() >= other.getLeft() &&
 			this->getLeft() <= other.getRight() &&
 			this->getTop() <= other.getBottom() &&
 			this->getBottom() >= other.getTop();
@@ -47,6 +47,8 @@ public:
 	bool isValidRectangle() const {
 		return (this->_x >= 0 && this->_y >= 0 && this->_width >= 0 && this->_height >= 0);
 	}
+
+	const inline Rectangle getRect() const { return *this; }
 
 private:
 	int _x, _y, _width, _height;

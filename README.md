@@ -1,4 +1,4 @@
-This project is based on [@Limeoats'](http://twitter.com/limeoats) excellent Cave Story tutorial [video series](https://www.youtube.com/watch?v=ETvApbD5xRo&list=PLNOBk_id22bw6LXhrGfhVwqQIa-M2MsLa). It differs in that it's written primarily for Linux on C++11 using clang and Make.
+This project is based on [@Limeoats'](http://twitter.com/limeoats) excellent Cave Story tutorial [video series](https://www.youtube.com/watch?v=ETvApbD5xRo&list=PLNOBk_id22bw6LXhrGfhVwqQIa-M2MsLa). Reference source found [here](https://github.com/limeoats/cavestory-development/). It differs in that it's written primarily for Linux on C++11 using clang and Make.
 
 Assets are taken from [cavestory.org](http://www.cavestory.org/downloads_game.php) and should be converted to .png and placed in `/content` in the appropriate subdirectory.
 
